@@ -1,6 +1,8 @@
 # 🧠 AI-Powered Fake News Detection System
 
-An advanced fake news detection system combining state-of-the-art NLP and graph-based deep learning techniques. This project uses RoBERTa, GNN (Graph Neural Networks), and HAN (Hierarchical Attention Networks) to classify news articles as **real** or **fake** with high accuracy.
+An advanced fake news detection system combining state-of-the-art NLP and graph-based deep learning techniques. This project uses **RoBERTa**, **GNN (Graph Neural Networks)**, and **HAN (Hierarchical Attention Networks)** to classify news articles as **real** or **fake** with high accuracy.
+
+![System Overview](assets/Architecture.png)
 
 ---
 
@@ -8,7 +10,7 @@ An advanced fake news detection system combining state-of-the-art NLP and graph-
 
 - 🔎 **Fake News Classification** using a hybrid model (RoBERTa + GNN + HAN)
 - 🌍 **Multilingual Support** via Google Translate
-- ✂️ **Summarization** using BART model
+- ✂️ **Summarization** using the BART model
 - 💬 **Sentiment Analysis** using `cardiffnlp/twitter-roberta-base-sentiment`
 - 🎙️ **Audio Input Support** (speech-to-text via Google Speech API)
 - 📊 **Fake Probability Score** (outputs percentage fake)
@@ -19,26 +21,47 @@ An advanced fake news detection system combining state-of-the-art NLP and graph-
 
 ## 📂 Dataset
 
-- **ISOT Fake News Dataset**
-  - `True.csv`: Real news articles
-  - `Fake.csv`: Fake news articles
-  - Total: ~44,000 articles
-- Columns: `title`, `text`,`label`
+### 📌 ISOT Fake News Dataset
+- `True.csv`: Real news articles  
+- `Fake.csv`: Fake news articles  
+- ~44,000 articles total  
+- **Columns**: `title`, `text`, `label`
+
+### 📌 WeLFake Dataset
+- A multilingual dataset containing both English and non-English articles
+- Useful for evaluating multilingual robustness
 
 ---
 
 ## 🧠 Model Architecture
 
 ### 1. **RoBERTa**
-- Extracts deep contextual embeddings from input text
+- Extracts deep contextual embeddings from the input text.
 
 ### 2. **GNN (Graph Neural Network)**
-- Captures structural and semantic relationships in the article
+- Captures structural and semantic relationships between sentences or keywords as a graph.
 
 ### 3. **HAN (Hierarchical Attention Network)**
-- Focuses attention at both word and sentence level
+- Applies attention at both word-level and sentence-level for better interpretability.
 
-These are combined in a hybrid architecture for robust fake news classification.
+These models are combined in a **hybrid ensemble** for robust fake news classification.
+
+---
+
+![Model Architecture](assets/Architecture_Design.png)
+
+---
+
+## 📊 Performance Metrics
+
+| Dataset | Accuracy | Precision | Recall | F1-Score |
+|---------|----------|-----------|--------|----------|
+| **WeLFake** | 97.48% | 97.53% | 97.48% | 97.48% |
+| **ISOT**    | 99.77% | 99.77% | 99.77% | 99.77% |
+
+> ✅ Results show near-perfect accuracy on ISOT and high generalization on WeLFake.
+
+---
 
 ---
 
@@ -56,6 +79,7 @@ These are combined in a hybrid architecture for robust fake news classification.
 ---
 
 ## 🖥️ System Flow
+
 ```mermaid
 graph TD
     A[Input (Text, Image, or Audio)] --> B[Extract News Text]
@@ -67,4 +91,3 @@ graph TD
     F --> G[Fake News Detection (RoBERTa + GNN + HAN)]
     G --> H[Display Result (Real/Fake with %)]
     H --> I[Feedback Collection / Telegram Bot Response]
-```
