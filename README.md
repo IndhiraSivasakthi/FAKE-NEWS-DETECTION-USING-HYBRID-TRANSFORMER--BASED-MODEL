@@ -2,7 +2,9 @@
 
 An advanced fake news detection system combining state-of-the-art NLP and graph-based deep learning techniques. This project uses **RoBERTa**, **GNN (Graph Neural Networks)**, and **HAN (Hierarchical Attention Networks)** to classify news articles as **real** or **fake** with high accuracy.
 
-![System Overview](assets/Architecture.png)
+<p align="center">
+  <img src="assets/Architecture.png" alt="System Overview" width="600"/>
+</p>
 
 ---
 
@@ -46,9 +48,9 @@ An advanced fake news detection system combining state-of-the-art NLP and graph-
 
 These models are combined in a **hybrid ensemble** for robust fake news classification.
 
----
-
-![Model Architecture](assets/Architecture_Design.png)
+<p align="center">
+  <img src="assets/Architecture_Design.png" alt="Model Architecture" width="600"/>
+</p>
 
 ---
 
@@ -63,8 +65,6 @@ These models are combined in a **hybrid ensemble** for robust fake news classifi
 
 ---
 
----
-
 ## 🛠️ Technologies Used
 
 - `Python`
@@ -75,19 +75,3 @@ These models are combined in a **hybrid ensemble** for robust fake news classifi
 - `Google Speech API`
 - `Telegram Bot API`
 - `ISOT Fake News Dataset`
-
----
-
-## 🖥️ System Flow
-
-```mermaid
-graph TD
-    A[Input (Text, Image, or Audio)] --> B[Extract News Text]
-    B --> C{Is English?}
-    C -- Yes --> D[Summarize using BART]
-    C -- No --> E[Translate to English]
-    E --> D
-    D --> F[Sentiment Analysis (RoBERTa)]
-    F --> G[Fake News Detection (RoBERTa + GNN + HAN)]
-    G --> H[Display Result (Real/Fake with %)]
-    H --> I[Feedback Collection / Telegram Bot Response]
