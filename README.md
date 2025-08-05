@@ -23,7 +23,7 @@ An advanced fake news detection system combining state-of-the-art NLP and graph-
   - `True.csv`: Real news articles
   - `Fake.csv`: Fake news articles
   - Total: ~44,000 articles
-- Columns: `title`, `text`
+- Columns: `title`, `text`,`label`
 
 ---
 
@@ -56,13 +56,15 @@ These are combined in a hybrid architecture for robust fake news classification.
 ---
 
 ## 🖥️ System Flow
-
 ```mermaid
 graph TD
-A[User Input: Text / Audio / Image] --> B[Language Detection]
-B --> C[Translate to English (if needed)]
-C --> D[Summarization using BART]
-D --> E[Fake News Prediction (RoBERTa + GNN + HAN)]
-E --> F[Sentiment Analysis (RoBERTa)]
-E --> G[Fake Score % Output]
-F --> H[Show Result + Feedback Option]
+    A[Input (Text, Image, or Audio)] --> B[Extract News Text]
+    B --> C{Is English?}
+    C -- Yes --> D[Summarize using BART]
+    C -- No --> E[Translate to English]
+    E --> D
+    D --> F[Sentiment Analysis (RoBERTa)]
+    F --> G[Fake News Detection (RoBERTa + GNN + HAN)]
+    G --> H[Display Result (Real/Fake with %)]
+    H --> I[Feedback Collection / Telegram Bot Response]
+```
